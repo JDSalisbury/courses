@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CourseController {
@@ -17,6 +18,12 @@ public class CourseController {
 		
 		model.addAttribute("courses", courseRepo.findAll());
 		return "courses";
+	}
+	
+	@RequestMapping("/course")
+	public String getACourse(@RequestParam (value = "id") String id, Model model) {
+		model.addAttribute("courses", courseRepo.findOne(id));
+		return "course";
 	}
 
 }
